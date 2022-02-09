@@ -1,0 +1,19 @@
+{
+    "name": "support-ticket",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start": "node backend/server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/chadtarpey615/support-ticket.git"
+    },
+    "author": "chad",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/chadtarpey615/support-ticket/issues"
+    },
+    "homepage": "https://github.com/chadtarpey615/support-ticket#readme"
+}
