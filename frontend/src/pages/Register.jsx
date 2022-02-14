@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,9 +15,11 @@ const Register = () => {
 
     const dispatch = useDispatch();
 
-    const { user, isLoading, isSuccess, message } = useSelector(
+    const { user, isLoading, isError, isSuccess, message } = useSelector(
         (state) => state.auth
     );
+
+    useEffect(() => {});
 
     const onChange = (e) => {
         setFormData((prevState) => ({

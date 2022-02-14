@@ -25,7 +25,7 @@ const Login = () => {
     };
 
     const onSubmit = (e) => {
-        e.prevent.default();
+        e.preventDefault();
 
         const userData = {
             email,
