@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
@@ -56,6 +57,10 @@ const Register = () => {
             dispatch(register(userData));
         }
     };
+
+    if (isLoading) {
+        return <Spinner />;
+    }
     return (
         <>
             <section className="heading">
