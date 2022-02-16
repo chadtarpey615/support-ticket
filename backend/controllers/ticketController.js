@@ -20,6 +20,19 @@ const getTickets = asyncHandler(async (req, res) => {
 
     const tickets = await Ticket.find({ user: req.user.id })
 
+
+
+
+
+    res.status(20).json(tickets)
+
+})
+
+// route GET /api/tickets/:id
+
+const getUserTicket = asyncHandler(async (req, res) => {
+    // get user from id and jwt
+
     const user = await User.findById(req.user.id)
 
     if (!user)
@@ -28,8 +41,25 @@ const getTickets = asyncHandler(async (req, res) => {
         throw new Error("User not found")
     }
 
+    const ticket = await Ticket.findById(req.params.id)
 
-    res.status(20).json(tickets)
+
+    if (!ticket)
+    {
+        res.status(404)
+        throw new Error("ticket not found")
+    }
+
+    if (ticket.user.toString() !== req.user.id)
+    {
+        res.status(401)
+        throw new Error("not authorized")
+    }
+
+
+
+
+    res.status(201).json(tickets)
 
 })
 
@@ -46,6 +76,8 @@ const createTicket = asyncHandler(async (req, res) => {
         throw new Error("Please add product and description")
     }
 
+    const user = await User.findById(req.user.id)
+
     if (!user)
     {
         res.status(401)
@@ -61,7 +93,95 @@ const createTicket = asyncHandler(async (req, res) => {
     res.status(201).json(ticket)
 })
 
+// @desc delete tickets
+// @route delete /api/tickets/:id
+// @access private
+
+const deleteTicket = asyncHandler(async (req, res) => {
+    // get user from id and jwt
+
+    const user = await User.findById(req.user.id)
+
+    if (!user)
+    {
+        res.status(401)
+        throw new Error("User not found")
+    }
+
+    const ticket = await Ticket.findById(req.params.id)
+
+
+    if (!ticket)
+    {
+        res.status(404)
+        throw new Error("ticket not found")
+    }
+
+
+
+    if (ticket.user.toString() !== req.user.id)
+    {
+        res.status(401)
+        throw new Error("not authorized")
+    }
+    await ticket.remove()
+
+
+
+
+    res.status(201).json({ success: true })
+
+})
+
+// @desc update tickets
+// @route put /api/tickets/:id
+// @access private
+
+const updateTicket = asyncHandler(async (req, res) => {
+    // get user from id and jwt
+
+    const user = await User.findById(req.user.id)
+
+    if (!user)
+    {
+        res.status(401)
+        throw new Error("User not found")
+    }
+
+    const ticket = await Ticket.findById(req.params.id)
+
+
+    if (!ticket)
+    {
+        res.status(404)
+        throw new Error("ticket not found")
+    }
+
+
+
+    if (ticket.user.toString() !== req.user.id)
+    {
+        res.status(401)
+        throw new Error("not authorized")
+    }
+
+
+    const updatedTicket = await Ticket.findByIdAndUpdate(req.params.id, req.body, { new: true })
+
+
+
+
+    res.status(201).json(updateTicket)
+
+})
+
+
+
 module.exports = {
     getTickets,
-    createTicket
+    getUserTicket,
+    createTicket,
+    deleteTicket,
+    updateTicket
+
 } 

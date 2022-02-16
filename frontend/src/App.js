@@ -6,6 +6,7 @@ import Header from "./components/Header"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
+import NewTickets from "./pages/NewTickets"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/new-tickets" element={<NewTickets />} />
           </Routes>
         </div>
       </Router>
