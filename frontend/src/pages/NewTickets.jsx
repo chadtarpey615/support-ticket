@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createTicket, reset } from "../features/tickets/ticketSlice";
 import Spinner from "../components/Spinner";
+import BackButton from "../components/BackButton";
 
 const NewTickets = () => {
     const { user } = useSelector((state) => state.auth);
@@ -42,6 +43,7 @@ const NewTickets = () => {
     }
     return (
         <>
+            <BackButton url="/" />
             <section className="heading">
                 <h1>Create New Ticket </h1>
                 <p>Please fill out the form below</p>
@@ -77,10 +79,10 @@ const NewTickets = () => {
                             value={product}
                             onChange={(e) => setProduct(e.target.value)}
                         >
-                            <option value="iPhone"></option>
-                            <option value="Macbook Pro"></option>
-                            <option value="iMac"></option>
-                            <option value="iPad"></option>
+                            <option value="iPhone">iPhone</option>
+                            <option value="Macbook Pro">Macbook Pro</option>
+                            <option value="iMac">iMac</option>
+                            <option value="iPad">iPad</option>
                         </select>
                     </div>
 
